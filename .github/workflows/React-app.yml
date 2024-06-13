@@ -36,7 +36,8 @@ jobs:
                       git checkout main || exit 1
                       git pull origin main
                     fi
-                      
+                    
+                      chmod +x deploy.sh
                       sh deploy.sh
                       '
 
