@@ -1,0 +1,7 @@
+name: react-application-workflow
+on:
+    workflow_dispatch:
+    push:
+        branch:
+            - "feature/*"
+            
