@@ -39,6 +39,7 @@ jobs:
                     
                       chmod +x deploy.sh
                       sh deploy.sh
+                      
                       '
 
                 
