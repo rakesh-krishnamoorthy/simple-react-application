@@ -3,7 +3,7 @@ on:
     workflow_dispatch:
     push:
         branches:
-               - "main"
+               - "feature/workflow"
 
 jobs: 
     deploy:
@@ -27,14 +27,14 @@ jobs:
                     if [ -d "simple-react-application" ]; then
                       echo "Repo exists already"
                       cd ./simple-react-application || exit 1
-                      git checkout main || exit 1
-                      git pull origin main
+                      git checkout feature/workflow || exit 1
+                      git pull origin feature/workflow
                     else
                       echo "Cloning repository"
-                      git clone git@github.com:rakesh-krishnamoorthy/simple-react-application.git || exit 1
+                      git clone git@github.com:rakesh-krishnamoorthy/simple-react-application.git -yes || exit 1
                       cd ./simple-react-application || exit 1
-                      git checkout main || exit 1
-                      git pull origin main
+                      git checkout feature/workflow || exit 1
+                      git pull origin feature/workflow
                     fi
                     
                       chmod +x deploy.sh
