@@ -4,6 +4,8 @@ set -e
 #install nodejs
 sudo apt update
 sudo apt install -y nodejs npm
+sudo npm install -g pm2
+
 
 #Checking the installation
 npm -v
