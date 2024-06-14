@@ -4,8 +4,30 @@ on:
     push:
         branches:
                - "feature/workflow" 
+               
 
 jobs: 
+    label-pr:
+        name: Label new pr 
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: label new pull request
+              uses: adityadhopade/label_pr_custom_action@v1.0.0
+              env: 
+                git_token: ${{ secrets.TOKENS_GITHUB }}
+              with: 
+                  github-token: 'git_token'
+                  label: 'new-pr'
+
+            - name: Label bug fixes
+              if: contains(github.event.pull_request.title, 'fix')
+              uses: adityadhopade/label_pr_custom_action@v1.0.0
+              with:
+                  github-token: ${{ secrets.TOKENS_GITHUB }}
+                  label: 'bug'
+
+              
     deploy:
         name: deploying to ec2 
         runs-on: ubuntu-latest
