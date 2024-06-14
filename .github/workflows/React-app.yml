@@ -12,19 +12,11 @@ jobs:
         runs-on: ubuntu-latest
 
         steps:
-            - name: Label new pull request as "new-pr"
+            - name: label new pull request
               uses: adityadhopade/label_pr_custom_action@v1.0.0
               with: 
                   github-token: ${{ secrets.TOKENS_GITHUB }}
                   label: 'new-pr'
-
-            - name: Label bug fixes
-              if: contains(github.event.pull_request.title, 'fix')
-              uses: adityadhopade/label_pr_custom_action@v1.0.0
-              with:
-                github-token: ${{ secrets.TOKENS_GITHUB }}
-                label: 'bug'
-
 
               
     deploy:
