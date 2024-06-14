@@ -15,16 +15,18 @@ jobs:
             - name: label new pull request
               uses: adityadhopade/label_pr_custom_action@v1.0.0
               env: 
-                git_token: ${{ secrets.TOKENS_GITHUB }}
+                gh_token: ${{ secrets.TOKENS_GITHUB }}
               with: 
-                  github-token: 'git_token'
+                  github-token: gh_token
                   label: 'new-pr'
 
             - name: Label bug fixes
               if: contains(github.event.pull_request.title, 'fix')
               uses: adityadhopade/label_pr_custom_action@v1.0.0
+              env: 
+                gh_token: ${{ secrets.TOKENS_GITHUB }}
               with:
-                  github-token: 'git_token'
+                  github-token: gh_token
                   label: 'bug'
 
               
