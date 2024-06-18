@@ -1,9 +1,8 @@
 name: react-application-workflow 
 on:
     workflow_dispatch:
-    push:
-        branches:
-               - "feature/workflow" 
+    pull_request:
+        types: [opened, reopened] 
                
 
 jobs: 
@@ -15,54 +14,15 @@ jobs:
             - name: label new pull request
               uses: adityadhopade/label_pr_custom_action@v1.0.0
               with: 
-                  github-token: ${{ secrets.TOKENS_GITHUB }}
+                  gh-token: ${{ secrets.ACCESS_GITHUB_TOKEN }}
                   label: 'new-pr'
 
             - name: Label bug fixes
               if: contains(github.event.pull_request.title, 'fix')
               uses: adityadhopade/label_pr_custom_action@v1.0.0
               with:
-                  github-token: ${{ secrets.TOKENS_GITHUB }}
+                  gh-token: ${{ secrets.ACCESS_GITHUB_TOKEN }}
                   label: 'bug'
-
-              
-    deploy:
-        name: deploying to ec2 
-        runs-on: ubuntu-latest
-
-        steps:
-            - name: Checkout the repository
-              uses: actions/checkout@v4
-
-            - name: Deploy the application
-              env:
-                  PRIVATE_KEY: ${{ secrets.EC2_SSH_PRIV_KEY }}
-                  HOST_NAME: ${{ vars.HOST_DNS }}
-                  USER_NAME: ${{ vars.USER_NAME }}
-
-              run: |
-                  echo "$PRIVATE_KEY" > private_key && chmod 400 private_key
-                  ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOST_NAME} '
-
-                    if [ -d "simple-react-application" ]; then
-                      echo "Repo exists already"
-                      cd ./simple-react-application || exit 1
-                      git checkout feature/workflow || exit 1
-                      git pull origin feature/workflow
-                      
-                    else
-                      echo "Cloning repository"
-                      git clone git@github.com:rakesh-krishnamoorthy/simple-react-application.git || exit 1
-                      cd ./simple-react-application || exit 1
-                      git checkout feature/workflow || exit 1
-                      git pull origin feature/workflow
-                    fi
-                    
-                      chmod +x deploy.sh
-                      sh deploy.sh
-                      '
-
-                
 
             
             
