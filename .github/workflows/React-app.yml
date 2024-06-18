@@ -1,9 +1,9 @@
 name: react-application-workflow 
 on:
     workflow_dispatch:
+
     pull_request:
         types: [opened, reopened] 
-               
 
 jobs: 
     label-pr:
@@ -23,6 +23,3 @@ jobs:
               with:
                   gh-token: ${{ secrets.ACCESS_GITHUB_TOKEN }}
                   label: 'bug'
-
-            
-            
