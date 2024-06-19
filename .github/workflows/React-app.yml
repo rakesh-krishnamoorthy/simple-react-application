@@ -1,7 +1,6 @@
 name: react-application-workflow 
 on:
     workflow_dispatch:
-
     pull_request:
         types: [opened, reopened] 
 
