@@ -7,7 +7,7 @@ sudo apt install -y nodejs npm
 sudo npm install -g pm2
 
 
-#Checking the installation
+#Checking the installations
 npm -v
 node -v
 
