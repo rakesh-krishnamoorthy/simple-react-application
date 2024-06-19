@@ -11,8 +11,8 @@ jobs:
         runs-on: ubuntu-latest
 
         steps:
-            - name: label new pull request
-              uses: adityadhopade/label_pr_custom_action@v1.0.0
+            - name: Custom action for labelling PR
+              uses: rakesh-krishnamoorthy/label-pr-custom-action@v1.0.0-alpha
               with: 
                   gh-token: ${{ secrets.ACCESS_GITHUB_TOKEN }}
                   label: 'new-pr'
